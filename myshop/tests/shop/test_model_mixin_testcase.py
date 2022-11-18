@@ -1,8 +1,8 @@
-from django.test import TestCase, Client
+from django.test import TestCase, RequestFactory
 from shop.models import Product, Category
-
-from django.contrib.auth.models import User
-from django.urls import reverse
+from django.contrib.sessions.middleware import SessionMiddleware
+from cart.cart import Cart
+from myshop.settings import CART_SESSION_ID
 
 
 class ModelMixinTestCase(TestCase):
@@ -30,3 +30,4 @@ class ModelMixinTestCase(TestCase):
             description="A book about how to write a clean code",
             price=25,
         )
+
