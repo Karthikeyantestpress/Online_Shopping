@@ -2,6 +2,8 @@ from django.test import TestCase, RequestFactory
 from django.contrib.sessions.middleware import SessionMiddleware
 from cart.cart import Cart
 from shop.models import Product, Category
+from coupons.models import Coupon
+
 
 
 class ModelMixinTestcase(TestCase):
@@ -25,3 +27,12 @@ class ModelMixinTestcase(TestCase):
             description="A gaming console",
             price=50.000,
         )
+
+        self.coupon=Coupon.objects.create(code ="firsttime",
+        valid_from="2022-12-09 03:35",
+        valid_to="2023-10-10 07:35",
+        discount=50, 
+        active=True,
+        )
+        self.discount_percent = self.coupon.discount/100
+
