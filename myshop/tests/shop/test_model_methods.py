@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .test_modelmixintestcase import ModelMixinTestCase
+from .test_model_mixin_testcase import ModelMixinTestCase
 from django.urls import reverse
 
 
