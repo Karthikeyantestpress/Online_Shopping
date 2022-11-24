@@ -3,7 +3,7 @@ from .test_modelmixintestcase import ModelMixinTestCase
 from django.urls import reverse
 
 
-class Test_model_method(ModelMixinTestCase, TestCase):
+class TestModelMethod(ModelMixinTestCase, TestCase):
     def test_absolute_url_in_category_model(self):
         self.product_list_category = reverse(
             "shop:product_list_by_category", args=[self.newcategory.slug]
