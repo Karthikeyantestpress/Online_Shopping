@@ -29,5 +29,5 @@ class TestViews(ModelMixinTestcase, TestCase):
         self.assertEqual(response.url, reverse("cart:cart_detail"))
 
     def test_cart_remove_returns_404_for_invalid_product(self):
-        request = self.client.post(reverse("cart:cart_remove", args=[10]))
-        self.assertEqual(request.status_code, 404)
+        response = self.client.post(reverse("cart:cart_remove", args=[10]))
+        self.assertEqual(response.status_code, 404)
