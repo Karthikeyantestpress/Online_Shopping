@@ -21,3 +21,13 @@ class TestViews(ModelMixinTestcase, TestCase):
     def test_cart_add_returns_redirect_to_cart_detail_for_valid_product(self):
         response = self.client.post(reverse("cart:cart_add", args=[1]))
         self.assertEqual(response.url, reverse("cart:cart_detail"))
+
+    def test_cart_remove_returns_redirect_to_cart_detail_for_valid_product(
+        self,
+    ):
+        response = self.client.post(reverse("cart:cart_remove", args=[1]))
+        self.assertEqual(response.url, reverse("cart:cart_detail"))
+
+    def test_cart_remove_returns_404_for_invalid_product(self):
+        response = self.client.post(reverse("cart:cart_remove", args=[10]))
+        self.assertEqual(response.status_code, 404)
