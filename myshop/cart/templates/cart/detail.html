@@ -6,7 +6,7 @@ Your shopping cart
 {% endblock %}
 
 {% block content %}
-<h1>Your shopping cart</h1>
+<h1>Shopping cart</h1>
 <table class="cart">
     <thead>
         <tr>
@@ -50,10 +50,27 @@ Your shopping cart
         {% endfor %}
     </tbody>
 </table>
-<p class="text-right">
-    <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
-    <a href="{%url "orders:order_create" %}" class="button">
-      Checkout
-    </a>
-  </p>
+<div>
+    <p class="text-right">
+        
+            {% with total_items=cart|length %}
+            {% if total_items > 0 %}
+            <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
+            <a href="{%url "orders:order_create" %}" class="button">
+              Checkout
+            </a>
+            {% else %}
+                <a href="{% url "shop:product_list" %}" onclick="myFunction()" class="button light">Add an item</a>
+                <a href="{%url "cart:cart_detail" %}"  class="button">
+              Checkout
+              <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+              <script>
+              swal("Your cart is empty")
+              </script> 
+            </a>
+            {% endif %}
+        {% endwith %}
+      
+    </p>
+</div>
 {% endblock %}
