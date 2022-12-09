@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cart.cart import Cart
 from .models import OrderItem
 from .forms import OrderCreateForm
 from .tasks import send_order_creation_mail
+from django.urls import reverse
 
 
 def show_empty_orderform_to_place_order(request):
@@ -20,9 +21,8 @@ def show_empty_orderform_to_place_order(request):
                 )
             cart.clear()
             send_order_creation_mail.delay(order.id)
-            return render(
-                request, "orders/order/created.html", {"order": order}
-            )
+            request.session["order_id"] = order.id
+            return redirect(reverse("payment:process"))
     else:
         form = OrderCreateForm()
     return render(
